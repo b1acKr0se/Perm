@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Perm</string>
+    <string name="permission_camera_rationale">Camera permission is needed to show the camera preview.</string>
+    <string name="permission_contacts_rationale">Contacts permissions are needed to demonstrate access.</string>
+</resources>

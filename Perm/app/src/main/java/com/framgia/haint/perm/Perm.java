@@ -2,6 +2,7 @@ package com.framgia.haint.perm;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 
 import java.util.ArrayList;
@@ -14,25 +15,23 @@ public class Perm {
     private Perm() {
     }
 
-    public static boolean isPermissionGranted(Activity activity, String permission) {
+    public static boolean isPermissionGranted(@NonNull Activity activity, @NonNull String permission) {
         return ActivityCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED;
     }
 
-    public static boolean shouldShowRequestPermissionRationale(Activity activity, String permission) {
+    public static boolean shouldShowRequestPermissionRationale(@NonNull Activity activity, @NonNull String permission) {
         return ActivityCompat.shouldShowRequestPermissionRationale(activity,
                 permission);
     }
 
-    public static void requestPermission(Activity activity, String[] permission, PermissionCallback callback) {
-        if (callback == null)
-            return;
+    public static void requestPermission(@NonNull Activity activity, @NonNull String[] permission, @NonNull PermissionCallback callback) {
         PermissionModel model = new PermissionModel(Arrays.asList(permission), callback);
         permissionModels.add(model);
         ActivityCompat.requestPermissions(activity, permission, model.getRequestCode());
 
     }
 
-    public static void onRequestPermissionResult(int requestCode, int[] grantResult) {
+    public static void onRequestPermissionResult(int requestCode, @NonNull int[] grantResult) {
         for (PermissionModel model : permissionModels) {
             if (model.getRequestCode() == requestCode) {
                 if (validatePermission(grantResult)) {
